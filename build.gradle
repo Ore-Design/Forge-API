@@ -1,0 +1,138 @@
+plugins
+{
+    id 'java-library'
+	id 'com.github.gmazzo.buildconfig' version '5.6.7'
+	id 'maven-publish'
+	id 'signing'
+	id 'tech.yanand.maven-central-publish' version '1.3.0'
+	id 'io.miret.etienne.sass' version '1.5.2'
+	id 'io.spring.dependency-management' version '1.1.7'
+}
+
+sourceCompatibility = 21
+targetCompatibility = 21
+
+archivesBaseName = "forge-api"
+group = 'design.ore.forge.api'
+version = "0.0.1"
+
+repositories
+{
+	mavenCentral()
+}
+
+java {
+	withSourcesJar()
+	withJavadocJar()
+}
+
+publishing {
+	publications {
+		mavenJava(MavenPublication) {
+			from components.java
+			pom {
+				name = 'Forge-API'
+				description = "API for developers to build custom plugins and integrations for Ore Designs' Forge."
+				url = 'https://c.ore.design'
+				licenses {
+					license {
+						name = 'Spellscroll API License v1'
+						url = 'https://c.ore.design/licenses'
+					}
+				}
+				developers {
+					developer {
+						id = 'jbatista'
+						name = 'Jacob Batista'
+						email = 'jbatista@ore.design'
+					}
+					developer {
+						id = 'kreynolds'
+						name = 'Kadyn Reynolds'
+						email = 'kreynolds@ore.design'
+					}
+				}
+				scm {
+					connection = 'scm:git:git://github.com/Ore-Design/Forge-API.git'
+					developerConnection = 'scm:git:ssh://github.com/Ore-Design/Forge-API.git'
+					url = 'https://c.ore.design'
+				}
+			}
+		}
+	}
+}
+
+signing {
+	useInMemoryPgpKeys(findProperty('forge-api.signing.key'), findProperty('forge-api.signing.password'))
+	sign publishing.publications.mavenJava
+}
+
+mavenCentral {
+	authToken = (findProperty('forge-api.mavencentral.username') + ':' + findProperty('forge-api.mavencentral.password')).bytes.encodeBase64().toString()
+}
+
+buildConfig {
+	className("ForgeApiConstants")
+	packageName("design.ore.forge.api")
+	useJavaOutput()
+	buildConfigField(String, 'VERSION', version)
+}
+
+dependencies
+{
+	annotationProcessor 'com.fasterxml.jackson.core:jackson-databind:2.18.3'
+	annotationProcessor 'com.google.auto.service:auto-service:1.1.1'
+	annotationProcessor 'org.projectlombok:lombok:1.18.36'
+
+	implementation 'ch.qos.logback:logback-core:1.5.18'
+	implementation 'ch.qos.logback:logback-classic:1.5.18'
+	implementation 'org.projectlombok:lombok:1.18.36'
+	implementation 'com.fasterxml.jackson.core:jackson-databind:2.18.3'
+	implementation 'com.google.auto.service:auto-service:1.1.1'
+	implementation 'commons-io:commons-io:2.18.0'
+	implementation 'jakarta.persistence:jakarta.persistence-api:3.1.0'
+
+	api platform("org.springframework.boot:spring-boot-dependencies:3.5.4")
+
+	api 'org.springframework.boot:spring-boot-starter-data-jpa'
+	api 'org.springframework.boot:spring-boot-starter-mail'
+	api 'org.springframework.boot:spring-boot-starter-oauth2-client'
+	api 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+	api 'org.springframework.boot:spring-boot-starter-security'
+	api 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	api 'org.springframework.boot:spring-boot-starter-web'
+	api 'org.springframework.boot:spring-boot-starter-websocket'
+	api 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
+}
+
+/*
+//////////////// WHEN USING API AS A GRADLE DEPENDENCY, SCSS MUST FIRST BE EXTRACTED FROM API JAR ////////////////
+
+plugins
+{
+	id 'io.miret.etienne.sass' version '1.5.2'
+}
+
+def forgeApiStylesJar = configurations.implementation.resolvedConfiguration
+	.files { it.name.startsWith("forge-api") }
+	.first()
+
+def forgeApiStylesDir = file("$buildDir/extracted-scss/forge-api")
+
+compileSass {
+	sourceDir = project.file("${projectDir}/src/main/resources/static/css")
+	outputDir = project.file("${layout.buildDirectory.get()}/resources/main/static/css")
+    loadPath forgeApiStylesDir
+}
+
+tasks.register("extractUiScss", Copy) {
+	from zipTree(forgeApiStylesJar)
+	include "scss/**"
+	into forgeApiStylesDir
+}
+
+tasks.named("compileSass") {
+  dependsOn("extractUiScss")
+}
+
+*/
