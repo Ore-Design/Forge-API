@@ -1,4 +1,4 @@
-package design.ore.forge.api.applets;
+package design.ore.forge.api.registrations;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
