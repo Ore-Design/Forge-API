@@ -11,6 +11,6 @@ import lombok.Setter;
 @Setter
 public class ForgeModuleManifest
 {
-    String moduleId, moduleName, moduleVersion, compatibleForgeAPIVersion, moduleRootPackage;
+    String moduleId, moduleName, moduleVersion, compatibleForgeAPIVersion, moduleRootPackage, moduleIconPath;
     boolean requireAuthentication;
 }

@@ -60,8 +60,9 @@ public class ForgeModuleProcessor extends AbstractProcessor
                         manifest.setModuleName((String) getModuleAnnotationValue(classElement, "name"));
                         manifest.setModuleVersion((String) getModuleAnnotationValue(classElement, "version"));
                         manifest.setModuleRootPackage((String) getModuleAnnotationValue(classElement, "rootPackage"));
+                        manifest.setModuleIconPath((String) getModuleAnnotationValue(classElement, "iconPath"));
                         manifest.setCompatibleForgeAPIVersion(ForgeApiConstants.VERSION);
-                        manifest.setRequireAuthentication((boolean) getModuleAnnotationValue(classElement, "requireAuthentication"));
+                        manifest.setRequireAuthentication((Boolean) getModuleAnnotationValue(classElement, "requireAuthentication"));
                     }
                 }
             }

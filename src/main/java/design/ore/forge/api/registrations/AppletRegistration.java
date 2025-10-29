@@ -10,5 +10,5 @@ public class AppletRegistration
 {
     String name;
     @Setter String logoResourcePath;
-    String targetUrl;
+    @Setter String targetUrl;
 }

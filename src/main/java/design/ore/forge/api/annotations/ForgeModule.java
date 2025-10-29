@@ -54,5 +54,7 @@ public @interface ForgeModule
 
     String rootPackage();
 
+    String iconPath() default "";
+
     boolean requireAuthentication() default true;
 }
