@@ -13,4 +13,6 @@ public class ForgeModuleManifest
 {
     String moduleId, moduleName, moduleVersion, compatibleForgeAPIVersion, moduleRootPackage, moduleIconPath;
     boolean requireAuthentication;
+    String sessionCreationPolicy; // ALWAYS, IF_REQUIRED, NEVER, STATELESS
+    boolean disableCsrf;
 }

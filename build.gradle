@@ -13,7 +13,7 @@ targetCompatibility = 21
 
 archivesBaseName = "forge-api"
 group = 'design.ore.forge.api'
-version = "0.0.1"
+version = "0.2.0"
 
 repositories
 {
@@ -83,13 +83,14 @@ dependencies
 	annotationProcessor 'com.google.auto.service:auto-service:1.1.1'
 	annotationProcessor 'org.projectlombok:lombok:1.18.36'
 
-	api 'ch.qos.logback:logback-core:1.5.18'
-	api 'ch.qos.logback:logback-classic:1.5.18'
+	api 'ch.qos.logback:logback-core:1.5.19'
+	api 'ch.qos.logback:logback-classic:1.5.19'
 	api 'org.projectlombok:lombok:1.18.36'
 	api 'com.fasterxml.jackson.core:jackson-databind:2.18.3'
 	api 'com.google.auto.service:auto-service:1.1.1'
 	api 'commons-io:commons-io:2.18.0'
 	api 'jakarta.persistence:jakarta.persistence-api:3.1.0'
+	api 'com.mysql:mysql-connector-j:9.5.0'
 
 	api platform("org.springframework.boot:spring-boot-dependencies:3.5.4")
 

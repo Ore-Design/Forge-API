@@ -2,13 +2,19 @@ package design.ore.forge.api.registrations;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
-@AllArgsConstructor
+@NoArgsConstructor
 @Getter
-public class AppletRegistration
+public class AppletRegistration extends Registration
 {
-    String name;
+    public AppletRegistration(String name, String targetUrl, String logoResourcePath)
+    {
+        super(name, targetUrl);
+        this.logoResourcePath = logoResourcePath;
+    }
+
     @Setter String logoResourcePath;
-    @Setter String targetUrl;
 }

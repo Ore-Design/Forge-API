@@ -57,4 +57,22 @@ public @interface ForgeModule
     String iconPath() default "";
 
     boolean requireAuthentication() default true;
+
+    /**
+     * The session creation policy for this module.
+     * Options: "ALWAYS", "IF_REQUIRED", "NEVER", "STATELESS"
+     * Default: "IF_REQUIRED" (inherits from main security chain)
+     *
+     * @return the session creation policy
+     */
+    String sessionCreationPolicy() default "IF_REQUIRED";
+
+    /**
+     * Whether to disable CSRF protection for this module's paths.
+     * Set to true for modules that don't need CSRF protection
+     * (e.g., stateless APIs, modules with custom authentication).
+     *
+     * @return true to disable CSRF, false to keep it enabled
+     */
+    boolean disableCsrf() default false;
 }

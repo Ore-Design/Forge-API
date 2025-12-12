@@ -62,7 +62,18 @@ public class ForgeModuleProcessor extends AbstractProcessor
                         manifest.setModuleRootPackage((String) getModuleAnnotationValue(classElement, "rootPackage"));
                         manifest.setModuleIconPath((String) getModuleAnnotationValue(classElement, "iconPath"));
                         manifest.setCompatibleForgeAPIVersion(ForgeApiConstants.VERSION);
-                        manifest.setRequireAuthentication((Boolean) getModuleAnnotationValue(classElement, "requireAuthentication"));
+
+                        // Handle requireAuthentication with default value of true
+                        Boolean requireAuth = (Boolean) getModuleAnnotationValue(classElement, "requireAuthentication");
+                        manifest.setRequireAuthentication(requireAuth != null ? requireAuth : true);
+
+                        // Handle sessionCreationPolicy with default value of "IF_REQUIRED"
+                        String sessionPolicy = (String) getModuleAnnotationValue(classElement, "sessionCreationPolicy");
+                        manifest.setSessionCreationPolicy(sessionPolicy != null ? sessionPolicy : "IF_REQUIRED");
+
+                        // Handle disableCsrf with default value of false
+                        Boolean disableCsrf = (Boolean) getModuleAnnotationValue(classElement, "disableCsrf");
+                        manifest.setDisableCsrf(disableCsrf != null ? disableCsrf : false);
                     }
                 }
             }

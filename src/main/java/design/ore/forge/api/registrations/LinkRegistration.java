@@ -6,15 +6,13 @@ import lombok.Setter;
 
 @AllArgsConstructor
 @Getter
-public class LinkRegistration
+public class LinkRegistration extends Registration
 {
-    public LinkRegistration(String name, String targetUrl)
+    public LinkRegistration(String name, String targetUrl, String logoOverrideUrl)
     {
-        this.name = name;
-        this.targetUrl = targetUrl;
+        super(name, targetUrl);
+        this.logoOverrideUrl = logoOverrideUrl;
     }
 
-    String name;
-    String targetUrl;
     @Setter String logoOverrideUrl;
 }
