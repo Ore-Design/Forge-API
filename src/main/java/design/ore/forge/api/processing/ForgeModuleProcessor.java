@@ -74,6 +74,10 @@ public class ForgeModuleProcessor extends AbstractProcessor
                         // Handle disableCsrf with default value of false
                         Boolean disableCsrf = (Boolean) getModuleAnnotationValue(classElement, "disableCsrf");
                         manifest.setDisableCsrf(disableCsrf != null ? disableCsrf : false);
+
+                        // Handle acceptJwtTokens with default value of false
+                        Boolean acceptJwtTokens = (Boolean) getModuleAnnotationValue(classElement, "acceptJwtTokens");
+                        manifest.setAcceptJwtTokens(acceptJwtTokens != null ? acceptJwtTokens : false);
                     }
                 }
             }

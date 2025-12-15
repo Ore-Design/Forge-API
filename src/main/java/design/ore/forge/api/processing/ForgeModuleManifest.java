@@ -15,4 +15,5 @@ public class ForgeModuleManifest
     boolean requireAuthentication;
     String sessionCreationPolicy; // ALWAYS, IF_REQUIRED, NEVER, STATELESS
     boolean disableCsrf;
+    boolean acceptJwtTokens; // If true, module endpoints accept OAuth2 JWT bearer tokens
 }

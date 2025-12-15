@@ -13,7 +13,7 @@ targetCompatibility = 21
 
 archivesBaseName = "forge-api"
 group = 'design.ore.forge.api'
-version = "0.2.0"
+version = "0.2.1"
 
 repositories
 {

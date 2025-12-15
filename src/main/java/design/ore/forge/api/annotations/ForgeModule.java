@@ -75,4 +75,17 @@ public @interface ForgeModule
      * @return true to disable CSRF, false to keep it enabled
      */
     boolean disableCsrf() default false;
+
+    /**
+     * Whether this module accepts OAuth2 JWT bearer tokens for authentication.
+     * When enabled, the module's endpoints will accept both:
+     * - JWT bearer tokens in the Authorization header (for external clients/desktop apps)
+     * - Session-based authentication (for web application)
+     *
+     * The JWT tokens are validated against the configured OAuth2 resource server
+     * (e.g., Microsoft identity platform) and user permissions are loaded from Forge.
+     *
+     * @return true to accept JWT tokens, false for session-only authentication
+     */
+    boolean acceptJwtTokens() default false;
 }
