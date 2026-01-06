@@ -56,6 +56,36 @@ public @interface ForgeModule
 
     String iconPath() default "";
 
+    /**
+     * Optional: Class implementing {@link design.ore.forge.api.interfaces.IModuleSecurityConfiguration}.
+     * <p>
+     * If provided, security configuration will be loaded from this class
+     * instead of the deprecated annotation fields. The class must:
+     * </p>
+     * <ul>
+     *   <li>Implement {@link design.ore.forge.api.interfaces.IModuleSecurityConfiguration}</li>
+     *   <li>Have a no-argument constructor OR be a Spring bean (for dependency injection)</li>
+     * </ul>
+     * <p>
+     * This is the <b>recommended</b> approach for configuring module security.
+     * </p>
+     * <p>
+     * Example: {@code securityConfigClass = MyModuleSecurityConfig.class}
+     * </p>
+     *
+     * @return the security configuration class, or IModuleSecurityConfiguration.class if not specified
+     * @since 0.3.0
+     */
+    Class<? extends design.ore.forge.api.interfaces.IModuleSecurityConfiguration> securityConfigClass()
+        default design.ore.forge.api.interfaces.IModuleSecurityConfiguration.class;
+
+    /**
+     * Whether authentication is required to access this module's endpoints.
+     *
+     * @return true if authentication required, false otherwise
+     * @deprecated Use {@link #securityConfigClass()} instead. This field will be removed in a future version.
+     */
+    @Deprecated(since = "0.3.0")
     boolean requireAuthentication() default true;
 
     /**
@@ -64,7 +94,9 @@ public @interface ForgeModule
      * Default: "IF_REQUIRED" (inherits from main security chain)
      *
      * @return the session creation policy
+     * @deprecated Use {@link #securityConfigClass()} instead. This field will be removed in a future version.
      */
+    @Deprecated(since = "0.3.0")
     String sessionCreationPolicy() default "IF_REQUIRED";
 
     /**
@@ -73,7 +105,9 @@ public @interface ForgeModule
      * (e.g., stateless APIs, modules with custom authentication).
      *
      * @return true to disable CSRF, false to keep it enabled
+     * @deprecated Use {@link #securityConfigClass()} instead. This field will be removed in a future version.
      */
+    @Deprecated(since = "0.3.0")
     boolean disableCsrf() default false;
 
     /**
@@ -86,6 +120,8 @@ public @interface ForgeModule
      * (e.g., Microsoft identity platform) and user permissions are loaded from Forge.
      *
      * @return true to accept JWT tokens, false for session-only authentication
+     * @deprecated Use {@link #securityConfigClass()} instead. This field will be removed in a future version.
      */
+    @Deprecated(since = "0.3.0")
     boolean acceptJwtTokens() default false;
 }

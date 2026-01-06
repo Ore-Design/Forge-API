@@ -12,6 +12,7 @@ import lombok.Setter;
 public class ForgeModuleManifest
 {
     String moduleId, moduleName, moduleVersion, compatibleForgeAPIVersion, moduleRootPackage, moduleIconPath;
+    String securityConfigClassName; // Fully qualified class name of IModuleSecurityConfiguration implementation
     boolean requireAuthentication;
     String sessionCreationPolicy; // ALWAYS, IF_REQUIRED, NEVER, STATELESS
     boolean disableCsrf;

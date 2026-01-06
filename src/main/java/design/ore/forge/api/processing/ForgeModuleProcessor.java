@@ -78,6 +78,16 @@ public class ForgeModuleProcessor extends AbstractProcessor
                         // Handle acceptJwtTokens with default value of false
                         Boolean acceptJwtTokens = (Boolean) getModuleAnnotationValue(classElement, "acceptJwtTokens");
                         manifest.setAcceptJwtTokens(acceptJwtTokens != null ? acceptJwtTokens : false);
+
+                        // Handle securityConfigClass - only set if not the default interface
+                        TypeMirror securityConfigClass = (TypeMirror) getModuleAnnotationValue(classElement, "securityConfigClass");
+                        if (securityConfigClass != null) {
+                            String className = securityConfigClass.toString();
+                            // Only set if not the default interface type
+                            if (!className.equals("design.ore.forge.api.interfaces.IModuleSecurityConfiguration")) {
+                                manifest.setSecurityConfigClassName(className);
+                            }
+                        }
                     }
                 }
             }
